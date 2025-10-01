@@ -60,6 +60,8 @@ public class UsuarioController {
     // URL: /usuarios/{id}
     @PatchMapping("/{id}")
     public ResponseEntity<UsuarioDTO> updateUsuario(@RequestBody Usuario  usuario, @PathVariable Long id) {
+        // PROVA DE VIDA: VAMOS VER SE ESTA MENSAGEM APARECE NOS LOGS
+        System.out.println("--- CONTROLLER: DENTRO DO MÉTODO updateUsuario ---");
         Optional<Usuario> updatedUsuario = usuarioService.update(id, usuario);
         if (updatedUsuario.isPresent()) {
             return ResponseEntity.ok(usuarioMapper.map(updatedUsuario.get()));
@@ -72,6 +74,8 @@ public class UsuarioController {
     // URL: /usuarios/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
+        // PROVA DE VIDA: VAMOS VER SE ESTA MENSAGEM APARECE NOS LOGS
+        System.out.println("--- CONTROLLER: DENTRO DO MÉTODO deleteUsuario ---");
         Optional<Usuario> usuario = usuarioService.findById(id);
         if (usuario.isPresent()) {
             usuarioService.deleteById(id);
