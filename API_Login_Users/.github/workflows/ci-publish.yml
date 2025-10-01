@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: ''
 
       # Build inside the subfolder if your project is in API_Login_Users,
       # otherwise use mvn -B clean package -DskipTests
