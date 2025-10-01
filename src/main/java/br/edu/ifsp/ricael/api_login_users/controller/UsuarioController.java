@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("usuarios")
+@RequestMapping("/usuarios") // Caminho base para todos os endpoints
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
@@ -21,9 +21,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioMapper usuarioMapper;
 
-    @GetMapping("get/{id}")
+    // Ação: Obter um usuário por ID
+    // Método: GET
+    // URL: /usuarios/{id}
+    @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id) {
-
         Optional<Usuario> usuario = usuarioService.findById(id);
         if (usuario.isPresent()) {
             return ResponseEntity.ok(usuarioMapper.map(usuario.get()));
@@ -31,13 +33,19 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/create")
+    // Ação: Criar um novo usuário
+    // Método: POST
+    // URL: /usuarios
+    @PostMapping
     public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody Usuario usuario) {
         Usuario savedUsuario = usuarioService.save(usuario);
         return ResponseEntity.ok(usuarioMapper.map(savedUsuario));
     }
 
-    @GetMapping("/get")
+    // Ação: Obter todos os usuários
+    // Método: GET
+    // URL: /usuarios
+    @GetMapping
     public ResponseEntity<Iterable<UsuarioDTO>> getAllUsuarios() {
         Iterable<Usuario> usuarios = usuarioService.findAll();
         List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
@@ -47,7 +55,10 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioDTOs);
     }
 
-    @PatchMapping("/get/{id}")
+    // Ação: Atualizar um usuário
+    // Método: PATCH
+    // URL: /usuarios/{id}
+    @PatchMapping("/{id}")
     public ResponseEntity<UsuarioDTO> updateUsuario(@RequestBody Usuario  usuario, @PathVariable Long id) {
         Optional<Usuario> updatedUsuario = usuarioService.update(id, usuario);
         if (updatedUsuario.isPresent()) {
@@ -56,8 +67,10 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-
-    @DeleteMapping({"/delete/{id}"})
+    // Ação: Apagar um usuário
+    // Método: DELETE
+    // URL: /usuarios/{id}
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioService.findById(id);
         if (usuario.isPresent()) {
@@ -67,3 +80,4 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 }
+
