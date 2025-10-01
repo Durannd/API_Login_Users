@@ -1,4 +1,5 @@
-name: Build, Publish Docker to GHCR
+
+name: Build with Maven, Publish Docker to GHCR
 
 on:
   push:
