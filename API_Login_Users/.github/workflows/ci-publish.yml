@@ -1,5 +1,5 @@
 
-name: Build with Maven, Publish Docker to GHCR
+name: Build, Publish Docker to GHCR
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/api-login-users
+  IMAGE_NAME: ${{ github.repository_owner }}/api_login_users
 
 jobs:
   build:
