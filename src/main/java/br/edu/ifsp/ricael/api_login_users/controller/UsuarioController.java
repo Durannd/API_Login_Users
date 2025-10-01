@@ -21,7 +21,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioMapper usuarioMapper;
 
-    @GetMapping("/{id}")
+    @GetMapping("get/{id}")
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id) {
 
         Optional<Usuario> usuario = usuarioService.findById(id);
@@ -31,13 +31,13 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody Usuario usuario) {
         Usuario savedUsuario = usuarioService.save(usuario);
         return ResponseEntity.ok(usuarioMapper.map(savedUsuario));
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<Iterable<UsuarioDTO>> getAllUsuarios() {
         Iterable<Usuario> usuarios = usuarioService.findAll();
         List<UsuarioDTO> usuarioDTOs = new ArrayList<>();
@@ -47,7 +47,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioDTOs);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/get/{id}")
     public ResponseEntity<UsuarioDTO> updateUsuario(@RequestBody Usuario  usuario, @PathVariable Long id) {
         Optional<Usuario> updatedUsuario = usuarioService.update(id, usuario);
         if (updatedUsuario.isPresent()) {
@@ -57,7 +57,7 @@ public class UsuarioController {
     }
 
 
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({"/delete/{id}"})
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioService.findById(id);
         if (usuario.isPresent()) {
