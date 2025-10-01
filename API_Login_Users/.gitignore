@@ -1,1 +1,3 @@
 git rm --cached target\API_Login_Users-0.0.1-SNAPSHOT.jartarget/
+target/
+*.jar

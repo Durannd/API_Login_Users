@@ -1,7 +1,0 @@
-br\edu\ifsp\ricael\api_login_users\controller\UsuarioController.class
-br\edu\ifsp\ricael\api_login_users\model\DTO\UsuarioDTO.class
-br\edu\ifsp\ricael\api_login_users\repository\UsuarioRepository.class
-br\edu\ifsp\ricael\api_login_users\services\UsuarioService.class
-br\edu\ifsp\ricael\api_login_users\model\Usuario.class
-br\edu\ifsp\ricael\api_login_users\ApiLoginUsersApplication.class
-br\edu\ifsp\ricael\api_login_users\model\DTO\UsuarioMapper.class
