@@ -27,7 +27,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Build inside the subfolder
       - name: Build with Maven (produce target/*.jar)
         run: mvn -B clean package -DskipTests
 
@@ -55,18 +54,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # ADICIONE ESTE NOVO PASSO AQUI
       - name: Verify workspace contents before Docker build
         run: ls -R
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
+          no-cache: true # Força um build limpo, ignorando o cache
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           build-args: |
             JAR_FILE=${{ env.JAR_FILE }}
