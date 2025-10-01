@@ -55,6 +55,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      # ADICIONE ESTE NOVO PASSO AQUI
+      - name: Verify workspace contents before Docker build
+        run: ls -R
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
