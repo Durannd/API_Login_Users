@@ -21,7 +21,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
         this.usuarioMapper = usuarioMapper;
     }
-    @Transactional(readOnly = true)
+    @Transactional()
     public Optional<Usuario> findByEmail(String email) {
         Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByEmail(email));
         if(usuario.isPresent()){
@@ -29,7 +29,7 @@ public class UsuarioService {
         }
         return  Optional.empty();
     }
-    @Transactional(readOnly = true)
+    @Transactional()
     public Optional<Usuario> findById(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if(usuario.isPresent()) {
@@ -37,7 +37,7 @@ public class UsuarioService {
         }
         return Optional.empty();
     }
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
