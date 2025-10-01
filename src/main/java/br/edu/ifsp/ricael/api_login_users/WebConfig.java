@@ -1,4 +1,4 @@
-package com.seupacote.config;
+package br.edu.ifsp.ricael.api_login_users;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
