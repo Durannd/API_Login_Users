@@ -25,14 +25,15 @@ jobs:
         with:
           java-version: '17'
 
+      # Build inside the subfolder
       - name: Build with Maven (produce target/*.jar)
-        run: mvn -B clean package -DskipTests
+        run: mvn -B -f API_Login_Users/pom.xml clean package -DskipTests
 
       - name: Detect built JAR
         id: detect_jar
         run: |
           set -e
-          JAR_PATH=$(ls target/*.jar | head -n 1)
+          JAR_PATH=$(ls API_Login_Users/target/*.jar | head -n 1)
           echo "Detected JAR: $JAR_PATH"
           echo "JAR_FILE=$JAR_PATH" >> $GITHUB_ENV
 
@@ -55,10 +56,12 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Dockerfile
+          context: ./API_Login_Users
+          file: ./API_Login_Users/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             JAR_FILE=${{ env.JAR_FILE }}
