@@ -54,6 +54,7 @@ public class UsuarioService {
 
     @Transactional
     public Optional<Usuario> update(Long id, Usuario usuario) {
+        System.out.println("--- EXECUTANDO MÉTODO UPDATE v5 ---");
         Optional<Usuario> usuarioUpdate = usuarioRepository.findById(id);
         if (usuarioUpdate.isPresent()) {
             usuarioUpdate.get().setEmail(usuario.getEmail());
