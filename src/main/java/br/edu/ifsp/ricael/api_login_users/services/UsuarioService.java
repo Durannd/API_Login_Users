@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsuarioService {
 
@@ -21,7 +21,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
         this.usuarioMapper = usuarioMapper;
     }
-
+    @Transactional(readOnly = true)
     public Optional<Usuario> findByEmail(String email) {
         Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByEmail(email));
         if(usuario.isPresent()){
@@ -29,7 +29,7 @@ public class UsuarioService {
         }
         return  Optional.empty();
     }
-
+    @Transactional(readOnly = true)
     public Optional<Usuario> findById(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if(usuario.isPresent()) {
@@ -37,19 +37,22 @@ public class UsuarioService {
         }
         return Optional.empty();
     }
-
+    @Transactional(readOnly = true)
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
 
+    @Transactional
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
 
+    @Transactional
     public Optional<Usuario> update(Long id, Usuario usuario) {
         Optional<Usuario> usuarioUpdate = usuarioRepository.findById(id);
         if (usuarioUpdate.isPresent()) {
