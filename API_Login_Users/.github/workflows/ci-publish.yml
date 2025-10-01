@@ -25,7 +25,8 @@ jobs:
         with:
           java-version: '17'
 
-      # Build inside the subfolder
+      # Build inside the subfolder if your project is in API_Login_Users,
+      # otherwise use mvn -B clean package -DskipTests
       - name: Build with Maven (produce target/*.jar)
         run: mvn -B -f API_Login_Users/pom.xml clean package -DskipTests
 
