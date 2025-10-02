@@ -22,8 +22,8 @@ public class UsuarioService {
         this.usuarioMapper = usuarioMapper;
     }
     @Transactional()
-    public Optional<Usuario> findByEmail(String email) {
-        Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByEmail(email));
+    public Optional<Usuario> findByName(String name) {
+        Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findByName(name));
         if(usuario.isPresent()){
             return usuario;
         }
