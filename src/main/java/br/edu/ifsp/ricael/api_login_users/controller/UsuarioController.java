@@ -82,7 +82,15 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-
+    @GetMapping("/exists/{name}")
+    public ResponseEntity<Boolean> existsByName(@PathVariable String name) {
+        Optional<Boolean> exists = usuarioService.existsByName(name);
+        if(exists.get() == true) {
+            return ResponseEntity.ok().build();
+        }else  {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 }

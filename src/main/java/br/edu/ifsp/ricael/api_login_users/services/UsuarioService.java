@@ -68,4 +68,9 @@ public class UsuarioService {
         return Optional.empty();
     }
 
+    @Transactional
+    public Optional<Boolean> existsByName(String name) {
+        boolean exists = usuarioRepository.existsByName(name);
+        return Optional.of(exists);
+    }
 }
